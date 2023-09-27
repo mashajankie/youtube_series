@@ -1,0 +1,14 @@
+[
+    {
+        "instument": "NAS100",
+        "price": "1.86666",
+        "method": "BUY",
+        "Date": ""
+    },
+    {
+        "instument": "NAS100",
+        "price": "2.65666",
+        "method": "SELL",
+        "Date": ""
+    }
+]
