@@ -76,15 +76,19 @@ def load_documents(source_dir: str) -> list[Document]:
 
 def split_documents(documents: list[Document]) -> tuple[list[Document], list[Document]]:
     # Splits documents for correct Text Splitter
-    text_docs, python_docs = [], []
+    text_docs, python_docs, script_docs, markdown_docs = [], [], [], []
     for doc in documents:
         file_extension = os.path.splitext(doc.metadata["source"])[1]
         if file_extension == ".py":
             python_docs.append(doc)
+        elif file_extension in [".js", ".jsx", ".ts", ".tsx"]:
+            script_docs.append(doc)
+        elif file_extension == ".md":
+            markdown_docs.append(doc)
         else:
             text_docs.append(doc)
 
-    return text_docs, python_docs
+    return text_docs, python_docs, script_docs, markdown_docs
 
 
 
@@ -93,13 +97,24 @@ def main(device_type=device_type):
     # Load documents and split in chunks
     logging.info(f"Loading documents from {SOURCE_DIRECTORY}")
     documents = load_documents(SOURCE_DIRECTORY)
-    text_documents, python_documents = split_documents(documents)
+    text_documents, python_documents, script_documents, markdown_documents = split_documents(documents)
+    
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     python_splitter = RecursiveCharacterTextSplitter.from_language(
         language=Language.PYTHON, chunk_size=880, chunk_overlap=200
     )
+    script_splitter = RecursiveCharacterTextSplitter.from_language(
+        language=Language.JS, chunk_size=880, chunk_overlap=200
+    )
+    markdown_splitter = RecursiveCharacterTextSplitter.from_language(
+        language=Language.MARKDOWN, chunk_size=880, chunk_overlap=200
+    )
+
     texts = text_splitter.split_documents(text_documents)
     texts.extend(python_splitter.split_documents(python_documents))
+    texts.extend(script_splitter.split_documents(script_documents))
+    texts.extend(markdown_splitter.split_documents(markdown_documents))
+
     logging.info(f"Loaded {len(documents)} documents from {SOURCE_DIRECTORY}")
     logging.info(f"Split into {len(texts)} chunks of text")
 

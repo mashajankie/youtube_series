@@ -5,8 +5,8 @@ This seems to have significant impact on the output of the LLM.
 '''
 
 from langchain.memory import ConversationBufferMemory
+from langchain.memory import MongoDBChatMessageHistory
 from langchain.prompts import PromptTemplate
-
 # this is specific to Llama-2. 
 
 system_prompt = """You are a helpful assistant, you will use the provided context to answer user questions.
@@ -14,7 +14,7 @@ Read the given context before answering questions and think step by step. If you
 the provided context, inform the user. Do not use any other information for answering user"""
 
 
-def get_prompt_template(system_prompt=system_prompt, promptTemplate_type=None, history=False):
+def get_prompt_template(system_prompt=system_prompt, promptTemplate_type=None, history=False, memory_unit="base"):
 
     if promptTemplate_type=="llama":
         B_INST, E_INST = "[INST]", "[/INST]"
@@ -52,6 +52,17 @@ def get_prompt_template(system_prompt=system_prompt, promptTemplate_type=None, h
             Answer:"""
             prompt = PromptTemplate(input_variables=["context", "question"], template=prompt_template)
 
-    memory = ConversationBufferMemory(input_key="question", memory_key="history")
+    # Provide the connection string to connect to the MongoDB database
+    connection_string = "mongodb://localhost:27017"
+
+    message_history = MongoDBChatMessageHistory(
+        connection_string=connection_string, session_id=memory_unit
+    )
+
+    memory = ConversationBufferMemory(
+        input_key="question",
+        memory_key="history", 
+        chat_memory=message_history
+    )
 
     return prompt, memory, 
