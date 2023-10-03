@@ -10,9 +10,9 @@ from langchain.document_loaders import CSVLoader, PDFMinerLoader, TextLoader, Un
 ROOT_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 
 # Define the folder for storing database
-SOURCE_DIRECTORY = f"{ROOT_DIRECTORY}/docs"
+SOURCE_DIRECTORY = f"./docs"
 
-PERSIST_DIRECTORY = f"{ROOT_DIRECTORY}/DB"
+PERSIST_DIRECTORY = f"./DB"
 
 MODELS_PATH = "./models"
 

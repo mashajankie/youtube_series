@@ -2,8 +2,6 @@ import logging
 import os
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
-import click
-import torch
 from langchain.docstore.document import Document
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
@@ -91,7 +89,6 @@ def split_documents(documents: list[Document]) -> tuple[list[Document], list[Doc
     return text_docs, python_docs, script_docs, markdown_docs
 
 
-
 device_type = 'cpu'
 def main(device_type=device_type):
     # Load documents and split in chunks
@@ -113,7 +110,7 @@ def main(device_type=device_type):
     texts = text_splitter.split_documents(text_documents)
     texts.extend(python_splitter.split_documents(python_documents))
     texts.extend(script_splitter.split_documents(script_documents))
-    texts.extend(markdown_splitter.split_documents(markdown_documents))
+    # texts.extend(markdown_splitter.split_documents(markdown_documents))
 
     logging.info(f"Loaded {len(documents)} documents from {SOURCE_DIRECTORY}")
     logging.info(f"Split into {len(texts)} chunks of text")
@@ -135,11 +132,8 @@ def main(device_type=device_type):
         embeddings,
         persist_directory=PERSIST_DIRECTORY,
         client_settings=CHROMA_SETTINGS,
-
     )
    
-
-
 if __name__ == "__main__":
     logging.basicConfig(
         format="%(asctime)s - %(levelname)s - %(filename)s:%(lineno)s - %(message)s", level=logging.INFO
