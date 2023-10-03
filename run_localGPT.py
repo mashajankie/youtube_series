@@ -1,7 +1,5 @@
 import os
 import logging
-import click
-import torch
 from langchain.llms import HuggingFacePipeline
 
 
@@ -35,7 +33,7 @@ def main(device_type=device_type, show_sources=show_sources, use_history=use_his
     qa = retrieval_qa_pipline(device_type, use_history, promptTemplate_type="llama")
     while True:
         query = input("\nEnter a query: ")
-        if query == "exit":
+        if query.lower() == "exit":
             break
 
         res = qa(query)

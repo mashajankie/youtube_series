@@ -12,6 +12,7 @@ ROOT_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 # Define the folder for storing database
 SOURCE_DIRECTORY = f"./docs"
 
+TEST_DIRECTORY = f"./DWDB"
 PERSIST_DIRECTORY = f"./DB"
 
 MODELS_PATH = "./models"
@@ -99,8 +100,11 @@ EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Ac
 #### (FOR GGUF MODELS)
 ####
 
-MODEL_ID = "TheBloke/Llama-2-13b-Chat-GGUF"
-MODEL_BASENAME = "llama-2-13b-chat.Q4_K_M.gguf"
+MODEL_ID = "TheBloke/Llama-2-13b-GGUF"
+MODEL_BASENAME = "llama-2-13b.Q4_K_M.gguf"
+
+# MODEL_ID = "TheBloke/Llama-2-13b-Chat-GGUF"
+# MODEL_BASENAME = "llama-2-13b-chat.Q4_K_M.gguf"
 
 # MODEL_ID = "TheBloke/Llama-2-7b-Chat-GGUF"
 # MODEL_BASENAME = "llama-2-7b-chat.Q4_K_M.gguf"
