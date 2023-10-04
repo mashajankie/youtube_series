@@ -1,8 +1,3 @@
-run_localGPT.py 
+# RAG implementation
 
-normal implementation
-
-run
-
-# youtube_series
-Youtube channels scripts and projects
+py run_localGPT.py 
