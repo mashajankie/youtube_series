@@ -100,11 +100,11 @@ EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Ac
 #### (FOR GGUF MODELS)
 ####
 
-# MODEL_ID = "TheBloke/Mistral-7B-OpenOrca-GGUF"
-# MODEL_BASENAME = "mistral-7b-openorca.Q4_K_M.gguf"
+MODEL_ID = "TheBloke/Mistral-7B-OpenOrca-GGUF"
+MODEL_BASENAME = "mistral-7b-openorca.Q4_K_M.gguf"
 
-MODEL_ID = "TheBloke/Llama-2-13b-GGUF"
-MODEL_BASENAME = "llama-2-13b.Q4_K_M.gguf"
+# MODEL_ID = "TheBloke/Llama-2-13b-GGUF"
+# MODEL_BASENAME = "llama-2-13b.Q4_K_M.gguf"
 
 # MODEL_ID = "TheBloke/Llama-2-13b-Chat-GGUF"
 # MODEL_BASENAME = "llama-2-13b-chat.Q4_K_M.gguf"
