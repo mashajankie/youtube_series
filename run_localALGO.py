@@ -2,7 +2,7 @@ import json
 import os
 import datetime
 
-from qa_memo import retrieval_qa_pipline
+from utils.agents.qa_memo import retrieval_qa_pipline
 from utils import log_op
 
 

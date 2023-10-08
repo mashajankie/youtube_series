@@ -6,15 +6,13 @@ from langchain.chains import RetrievalQA
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler  # for streaming response
 
-from prompt_template_utils import get_prompt_template
-from load_models import load_full_model    
+from utils.prompts.prompt_template_utils import get_prompt_template
+from utils.loader.load_models import load_full_model    
 from constants import (
     EMBEDDING_MODEL_NAME,
     PERSIST_DIRECTORY,
     MODEL_ID,
     MODEL_BASENAME,
-    MAX_NEW_TOKENS,
-    MODELS_PATH,
 )
 
 callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])

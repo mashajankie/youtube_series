@@ -43,19 +43,22 @@ N_BATCH = 512
 # https://python.langchain.com/en/latest/_modules/langchain/document_loaders/excel.html#UnstructuredExcelLoader
 DOCUMENT_MAP = {
     ".txt": TextLoader,
+    ".md": TextLoader,
+    ".pdf": PDFMinerLoader,
     
     ".mq5": TextLoader,
-    ".md": TextLoader,
+    ".mq4": TextLoader,
+    
     ".py": TextLoader,
     ".js": TextLoader,
     ".jsx": TextLoader,
     ".ts": TextLoader,
     ".tsx": TextLoader,
 
-    ".pdf": PDFMinerLoader,
     ".csv": CSVLoader,
     ".xls": UnstructuredExcelLoader,
     ".xlsx": UnstructuredExcelLoader,
+    
     ".docx": Docx2txtLoader,
     ".doc": Docx2txtLoader,
 }
@@ -100,17 +103,17 @@ EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Ac
 #### (FOR GGUF MODELS)
 ####
 
-MODEL_ID = "TheBloke/Mistral-7B-OpenOrca-GGUF"
-MODEL_BASENAME = "mistral-7b-openorca.Q4_K_M.gguf"
+# MODEL_ID = "TheBloke/Mistral-7B-OpenOrca-GGUF"
+# MODEL_BASENAME = "mistral-7b-openorca.Q4_K_M.gguf"
+
+MODEL_ID = "TheBloke/Llama-2-7b-Chat-GGUF"
+MODEL_BASENAME = "llama-2-7b-chat.Q4_K_M.gguf"
 
 # MODEL_ID = "TheBloke/Llama-2-13b-GGUF"
 # MODEL_BASENAME = "llama-2-13b.Q4_K_M.gguf"
 
 # MODEL_ID = "TheBloke/Llama-2-13b-Chat-GGUF"
 # MODEL_BASENAME = "llama-2-13b-chat.Q4_K_M.gguf"
-
-# MODEL_ID = "TheBloke/Llama-2-7b-Chat-GGUF"
-# MODEL_BASENAME = "llama-2-7b-chat.Q4_K_M.gguf"
 
 # MODEL_ID = "TheBloke/Llama-2-70b-Chat-GGUF"
 # MODEL_BASENAME = "llama-2-70b-chat.Q4_K_M.gguf"
