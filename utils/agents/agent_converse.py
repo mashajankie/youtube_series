@@ -1,4 +1,4 @@
-from langchain.agents import initialize_agent
+from langchain.agents.initialize import initialize_agent
 from langchain.agents import Tool
 
 from langchain.callbacks.manager import CallbackManager
@@ -48,7 +48,8 @@ def agent_pipline(device_type, use_history, memory_unit, promptTemplate_type="ll
             verbose=True,
             max_iterations=10,
             early_stopping_method='generate',
-            memory=conversational_memory
+            memory=conversational_memory,
+            handle_parsing_errors=True
         )
         # qa = RetrievalQA.from_chain_type(
         #     llm=llm,
