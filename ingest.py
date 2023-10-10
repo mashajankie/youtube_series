@@ -110,7 +110,7 @@ def main(device_type=device_type):
     texts = text_splitter.split_documents(text_documents)
     texts.extend(python_splitter.split_documents(python_documents))
     texts.extend(script_splitter.split_documents(script_documents))
-    # texts.extend(markdown_splitter.split_documents(markdown_documents))
+    texts.extend(markdown_splitter.split_documents(markdown_documents))
 
     logging.info(f"Loaded {len(documents)} documents from {SOURCE_DIRECTORY}")
     logging.info(f"Split into {len(texts)} chunks of text")

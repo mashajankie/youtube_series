@@ -6,7 +6,9 @@ from langchain.chains import RetrievalQA
 from langchain.callbacks.manager import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler  # for streaming response
 
-from utils.prompts.prompt_template_utils import get_prompt_template
+# from utils.prompts.prompt_template
+# _utils import get_prompt_template
+from utils.prompts.prompt_template_utils_advanced import get_prompt_template
 from utils.loader.load_models import load_full_model    
 from constants import (
     EMBEDDING_MODEL_NAME,
