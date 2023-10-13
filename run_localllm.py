@@ -17,6 +17,8 @@ device_type = 'cpu'
 show_sources = False
 use_history = True
 
+from utils.code.general.script import ensure_folder_exists, create_llm_result
+
 def main(device_type=device_type, use_history=use_history):
     if not os.path.exists(MODELS_PATH):
         os.mkdir(MODELS_PATH)
@@ -31,10 +33,7 @@ def main(device_type=device_type, use_history=use_history):
         answer = chain.run(query)
         
         result_folder = "./results/chain"
-        num = len(os.listdir(result_folder))
-        filenaming = f'query{num}.md'
-        with open(os.path.join(result_folder, filenaming), 'w') as f:
-            f.write(answer)
+        create_llm_result(result_folder)
 
         print("\n\n> Question:")
         print(query)

@@ -1,11 +1,14 @@
 import logging
 import os
+import fnmatch
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, as_completed
 
 from langchain.docstore.document import Document
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from langchain.text_splitter import Language, RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
+from utils.code.general.ignore_list import IGNORE_LIST
+
 
 from constants import (
     CHROMA_SETTINGS,
@@ -39,6 +42,12 @@ def load_document_batch(filepaths):
         # return data and file paths
         return (data_list, filepaths)
 
+def should_ignore(path: str, ignore_list: list[str]) -> bool:
+    """Check if the given path should be ignored based on the ignore list."""
+    for pattern in ignore_list:
+        if fnmatch.fnmatch(path, pattern):
+            return True
+    return False
 
 def load_documents(source_dir: str) -> list[Document]:
     # Loads all documents from the source documents directory, including nested folders
@@ -47,6 +56,9 @@ def load_documents(source_dir: str) -> list[Document]:
         for file_name in files:
             file_extension = os.path.splitext(file_name)[1]
             source_file_path = os.path.join(root, file_name)
+            # Check if the path should be ignored
+            if should_ignore(source_file_path, IGNORE_LIST):
+                continue
             if file_extension in DOCUMENT_MAP.keys():
                 paths.append(source_file_path)
 
