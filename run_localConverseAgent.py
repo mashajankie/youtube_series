@@ -1,7 +1,7 @@
 from utils.code.general.script import create_llm_result
 import os
 import logging
-from utils.agents.chain import llm_chain_pipeline
+from utils.agents.agent_converse import agent_converse_pipline
 from constants import (
     MODELS_PATH,
 )
@@ -14,23 +14,22 @@ def main(device_type=device_type, use_history=use_history):
     if not os.path.exists(MODELS_PATH):
         os.mkdir(MODELS_PATH)
 
-    chain = llm_chain_pipeline(device_type, use_history, memory_unit='project-llm', promptTemplate_type="llama")
-    
+    agent = agent_converse_pipline(device_type, use_history, memory_unit='project-converse-agent', promptTemplate_type="llama")
+
     while True:
         query = input("\nEnter a query: ")
         if query.lower() == "exit":
             break
 
-        answer = chain.run(query)
-        
-        result_folder = "./results/chain"
+        answer = agent(query)
+
+        result_folder = "./results/converse"
         create_llm_result(result_folder, answer)
 
         print("\n\n> Question:")
         print(query)
         print("\n\n> Answer:")
         print(answer)
-
 
 
 if __name__ == "__main__":

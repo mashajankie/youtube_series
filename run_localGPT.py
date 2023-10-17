@@ -1,16 +1,11 @@
 import os
 import logging
-from langchain.llms import HuggingFacePipeline
-
-# from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-
 from utils.agents.qa import retrieval_qa_pipline
 from constants import (
     MODELS_PATH,
 )
 
 device_type = 'cpu'
-# show_sources = True
 show_sources = False
 use_history = True
 
@@ -18,7 +13,8 @@ def main(device_type=device_type, show_sources=show_sources, use_history=use_his
     if not os.path.exists(MODELS_PATH):
         os.mkdir(MODELS_PATH)
 
-    qa = retrieval_qa_pipline(device_type, use_history, promptTemplate_type="llama")
+    qa = retrieval_qa_pipline(device_type, use_history, memory_unit='project-gpt', promptTemplate_type="llama")
+    
     while True:
         query = input("\nEnter a query: ")
         if query.lower() == "exit":

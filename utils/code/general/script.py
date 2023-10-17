@@ -19,9 +19,9 @@ def ensure_folder_exists(folder):
     if not os.path.exists(folder):
         os.makedirs(folder)
 
-def create_llm_result(folder):
+def create_llm_result(folder, data):
     ensure_folder_exists(folder)
     num = len(os.listdir(folder))
     filenaming = f'query{num}.md'
     with open(os.path.join(folder, filenaming), 'w') as f:
-        f.write(folder)
+        f.write(data)

@@ -1,7 +1,7 @@
 from utils.code.general.script import create_llm_result
 import os
 import logging
-from utils.agents.chain import llm_chain_pipeline
+from utils.agents.agent_tools import agent_tool_pipline
 from constants import (
     MODELS_PATH,
 )
@@ -14,7 +14,7 @@ def main(device_type=device_type, use_history=use_history):
     if not os.path.exists(MODELS_PATH):
         os.mkdir(MODELS_PATH)
 
-    chain = llm_chain_pipeline(device_type, use_history, memory_unit='project-llm', promptTemplate_type="llama")
+    chain = agent_tool_pipline(device_type, use_history, memory_unit='project-tool-agent', promptTemplate_type="llama")
     
     while True:
         query = input("\nEnter a query: ")
@@ -23,7 +23,7 @@ def main(device_type=device_type, use_history=use_history):
 
         answer = chain.run(query)
         
-        result_folder = "./results/chain"
+        result_folder = "./results/agent"
         create_llm_result(result_folder, answer)
 
         print("\n\n> Question:")
