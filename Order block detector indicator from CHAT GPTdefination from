@@ -1,0 +1,70 @@
+The provided code appears to be a script written in Pine Script, a domain-specific language used for creating custom technical analysis indicators and strategies on the TradingView platform. Let's break down the key components and functionality of this script:
+
+1. **Indicator Declaration**:
+   - The script is defined as a custom indicator using the `indicator` keyword.
+   - It is set to be overlaid on the price chart and allows for a maximum number of boxes, labels, and lines to be drawn on the chart.
+
+2. **Settings**:
+   - The script includes several input parameters that can be customized by the user. These parameters include settings related to volume analysis, order block detection, colors, line styles, and mitigation methods.
+
+3. **Functions**:
+   - The script defines several functions to perform specific tasks. These functions include:
+     - `get_line_style(style)`: A function to determine the style of lines used for drawing order blocks.
+     - `get_coordinates(condition, top, btm, ob_val)`: A function to get the coordinates for order blocks based on specific conditions.
+     - `remove_mitigated(ob_top, ob_btm, ob_left, ob_avg, target, bull)`: A function to remove mitigated order blocks from the coordinate arrays.
+     - `set_order_blocks(ob_top, ob_btm, ob_left, ob_avg, ext_last, bg_css, border_css, lvl_css)`: A function to set order blocks on the chart using various visual elements like boxes and lines.
+
+4. **Global Elements**:
+   - The script defines global variables and arrays used to store values and track the current state of the script.
+
+5. **Calculations**:
+   - The script calculates various values, such as pivot highs (phv), upper and lower levels, and the overall market state (os).
+
+6. **Get Bullish and Bearish Order Blocks**:
+   - The script calculates the coordinates and other details for both bullish and bearish order blocks based on specified conditions.
+
+7. **Remove Mitigated Order Blocks**:
+   - It checks if certain order blocks have been mitigated (hidden) based on user-defined criteria and removes them from the coordinate arrays if necessary.
+
+8. **Display Order Blocks**:
+   - The script sets and displays order blocks on the chart for both bullish and bearish cases. These order blocks are drawn as visual elements (boxes and lines) with specified styles and colors.
+
+9. **Alerts**:
+   - The script defines conditions for generating alerts when specific events occur, such as the formation or mitigation of order blocks.
+
+This script is designed to detect and visualize order blocks on a trading chart, with a focus on both bullish and bearish scenarios. Users can customize the script's settings to tailor it to their specific trading needs and preferences. It also includes alerts to notify the user of important events related to order blocks.
+
+
+
+QUESTION THAT ASKED gpt
+explaine how it detect order block?
+
+
+
+The provided Pine Script detects order blocks using specific criteria and price action patterns. Order blocks are price regions on a chart where significant accumulation or distribution of orders is believed to have occurred. These regions can be indicative of potential support and resistance levels. Here's how the script detects order blocks:
+
+1. **Pivot Highs (phv)**:
+   - The script uses a variable called `phv`, which stands for "pivot highs." These are price levels where the high of the current bar is greater than the high of the previous `length` bars, indicating a potential reversal or turning point in the market.
+   - Pivot highs are often associated with increased trading activity and can be indicative of order block formation.
+
+2. **Market State (os)**:
+   - The script tracks the "market state" using the variable `os`. It checks whether the current high price is above an upper level or the current low price is below a lower level. This is used to determine the overall state of the market: bullish (os = 0) or bearish (os = 1).
+
+3. **Coordinate Calculation**:
+   - The script calculates the coordinates for both bullish and bearish order blocks based on specific conditions:
+     - **Bullish Order Blocks**:
+       - These are calculated when pivot highs occur while the market is in a bearish state (os = 1).
+       - The script calculates the top, bottom, and average price levels, as well as the left side coordinates for each order block.
+     - **Bearish Order Blocks**:
+       - These are calculated when pivot highs occur while the market is in a bullish state (os = 0).
+       - Similar to bullish order blocks, the script calculates top, bottom, and average prices, as well as the left side coordinates for bearish order blocks.
+
+4. **Mitigation**:
+   - The script includes the option for "mitigation" of order blocks. Mitigation involves hiding or removing order blocks under certain conditions.
+   - The specific conditions for mitigation can be configured by the user. Typically, order blocks may be mitigated based on price levels or the closing price of the current bar.
+
+5. **Visualization**:
+   - After calculating the coordinates, the script sets order blocks on the chart using visual elements such as boxes and lines. The appearance of these blocks is customizable by the user, allowing them to specify colors, line styles, and other visual properties.
+   - Bullish and bearish order blocks are visually distinguished on the chart.
+
+In summary, the script detects order blocks by analyzing price action patterns, particularly pivot highs, in conjunction with the market state. It then calculates and visualizes these order blocks on the chart, giving traders insights into potential support and resistance levels. Users can customize the script to define how order blocks are displayed and under what conditions they should be mitigated.
